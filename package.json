@@ -1,0 +1,8 @@
+{
+  "name": "kaimei-100-knocks",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test": "node --input-type=module -e \"import('./tests/core.test.js').then(() => import('./tests/dom-contract.test.js'))\""
+  }
+}

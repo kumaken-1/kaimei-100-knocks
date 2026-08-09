@@ -1,0 +1,184 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="description"
+      content="子どもの事実から、授業と学校を決め直す。開明小の教職員向け思考トレーニング。"
+    />
+    <title>開明小を考える100本ノック</title>
+    <link rel="stylesheet" href="css/styles.css" />
+  </head>
+  <body>
+    <a class="skip-link" href="#main-content">本文へ移動</a>
+
+    <header class="site-header">
+      <button class="brand" id="brand-button" type="button" aria-label="ホームへ戻る">
+        <span class="brand-mark" aria-hidden="true">問</span>
+        <span>
+          <span class="brand-school">開明小を考える</span>
+          <span class="brand-title">100本ノック</span>
+        </span>
+      </button>
+      <nav class="top-nav" aria-label="主な画面">
+        <button class="nav-button" id="home-nav" type="button">ホーム</button>
+        <button class="nav-button" id="list-nav" type="button">問い一覧</button>
+      </nav>
+    </header>
+
+    <main id="main-content" tabindex="-1">
+      <section class="view home-view" id="home-view" aria-labelledby="home-title">
+        <div class="home-grid">
+          <div class="hero-copy">
+            <p class="eyebrow">正解を当てない、判断の練習。</p>
+            <h1 id="home-title">
+              子どもの事実から、<br />
+              授業と学校を<br />
+              <span>決め直す。</span>
+            </h1>
+            <p class="hero-lead">
+              短いケースに立ち止まり、いまの考えを仮置きする。<br class="desktop-only" />
+              別の見方に出会ったら、もう一度考えてみる。
+            </p>
+            <div class="hero-actions">
+              <button class="primary-button" id="continue-button" type="button">
+                <span id="continue-label">1問目から始める</span>
+                <span aria-hidden="true">→</span>
+              </button>
+              <button class="secondary-button" id="random-home-button" type="button">
+                ランダムで1問
+              </button>
+            </div>
+          </div>
+
+          <aside class="progress-card" aria-labelledby="progress-heading">
+            <p class="card-kicker">YOUR PACE</p>
+            <h2 id="progress-heading">いまの進み具合</h2>
+            <div class="progress-numbers" aria-live="polite">
+              <strong id="home-completed">0</strong>
+              <span>／ <span id="home-total">100</span> 問に立ち止まった</span>
+            </div>
+            <div
+              class="progress-track"
+              role="progressbar"
+              aria-label="回答の進捗"
+              aria-valuemin="0"
+              aria-valuemax="100"
+              aria-valuenow="0"
+              id="home-progress"
+            >
+              <span id="home-progress-fill"></span>
+            </div>
+            <p class="progress-note">急がなくて大丈夫。1問だけでも、授業を見る角度は増やせます。</p>
+          </aside>
+        </div>
+
+        <div class="four-lenses" aria-label="問いを考える4つの視点">
+          <p>立ち止まるときの4つの視点</p>
+          <ul>
+            <li><span>01</span>何のためか</li>
+            <li><span>02</span>誰が判断するのか</li>
+            <li><span>03</span>何を根拠にするのか</li>
+            <li><span>04</span>その手段は本当に必要か</li>
+          </ul>
+        </div>
+
+        <p class="privacy-note">
+          メモはこの端末内だけに保存されます。児童名などの個人情報は書かないでください。
+        </p>
+      </section>
+
+      <section class="view question-view" id="question-view" aria-labelledby="question-title" hidden>
+        <div class="question-toolbar">
+          <button class="text-button" id="question-back-button" type="button">← 問い一覧</button>
+          <div class="mini-progress" aria-live="polite">
+            <span id="question-progress-text">0 / 100</span>
+            <span class="mini-progress-track" aria-hidden="true">
+              <span id="question-progress-fill"></span>
+            </span>
+          </div>
+        </div>
+
+        <article class="question-card">
+          <header class="question-card-header">
+            <div>
+              <p class="knock-number" id="question-number">KNOCK 01</p>
+              <p class="question-theme" id="question-theme">授業を見るものさし</p>
+            </div>
+            <button class="icon-button" id="random-question-button" type="button" aria-label="別の問いをランダムに開く">
+              <span aria-hidden="true">↝</span>
+              <span>別の1問</span>
+            </button>
+          </header>
+
+          <div class="case-block">
+            <p class="case-label">こんな場面</p>
+            <p id="question-context"></p>
+          </div>
+
+          <h1 id="question-title"></h1>
+
+          <form id="answer-form">
+            <fieldset>
+              <legend>いまの考えに近いものを、ひとまず選んでみる</legend>
+              <div class="choice-list" id="choice-list"></div>
+            </fieldset>
+
+            <label class="note-field" for="thought-note">
+              <span>考えのメモ <small>任意・この端末だけに保存</small></span>
+              <textarea
+                id="thought-note"
+                rows="3"
+                maxlength="300"
+                placeholder="理由や、気になった子どもの姿を短く…（児童名は書かない）"
+              ></textarea>
+            </label>
+
+            <p class="form-message" id="form-message" aria-live="polite"></p>
+            <button class="primary-button reveal-button" type="submit">視点をひらく</button>
+          </form>
+
+          <section class="reflection-panel" id="reflection-panel" aria-labelledby="perspective-title" tabindex="-1" hidden>
+            <p class="reflection-kicker">視点を少し、ずらしてみる</p>
+            <h2 id="perspective-title"></h2>
+            <p class="perspective-body" id="perspective-body"></p>
+            <div class="follow-up-block">
+              <p>もう一段、考えるなら</p>
+              <ul id="follow-up-list"></ul>
+            </div>
+            <div class="next-actions">
+              <button class="primary-button" id="next-button" type="button">
+                次のノックへ <span aria-hidden="true">→</span>
+              </button>
+              <button class="secondary-button" id="list-after-button" type="button">問い一覧を見る</button>
+            </div>
+          </section>
+        </article>
+      </section>
+
+      <section class="view list-view" id="list-view" aria-labelledby="list-title" hidden>
+        <header class="list-header">
+          <div>
+            <p class="eyebrow">100 QUESTIONS</p>
+            <h1 id="list-title">今日は、どの問いに<br />立ち止まる？</h1>
+            <p>順番どおりでなくても大丈夫。気になる場面から開けます。</p>
+          </div>
+          <button class="secondary-button" id="random-list-button" type="button">ランダムで1問</button>
+        </header>
+        <div class="list-controls">
+          <label for="list-group-filter">問いのまとまり</label>
+          <select id="list-group-filter"></select>
+          <div class="list-summary" id="list-summary" aria-live="polite">0 / 100 問</div>
+        </div>
+        <ol class="question-list" id="question-list"></ol>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <p>開明小を考える100本ノック <span>— 答えではなく、次に見る事実を。</span></p>
+    </footer>
+
+    <script type="module" src="js/app.js"></script>
+  </body>
+</html>

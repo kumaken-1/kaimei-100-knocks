@@ -1,0 +1,5 @@
+tmp/
+docs/
+\#_*.txt
+.DS_Store
+Thumbs.db
