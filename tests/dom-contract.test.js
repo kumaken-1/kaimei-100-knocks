@@ -18,6 +18,7 @@ const requiredHtml = [
   'id="deep-dive-perspective"',
   'id="deep-dive-evidence"',
   'id="deep-dive-experiment"',
+  'id="deep-dive-condition"',
   'id="question-list"',
   'id="list-group-filter"',
   'aria-live="polite"',
@@ -43,6 +44,14 @@ assert.ok(!html.includes("https://"), "the app should not require external asset
 assert.ok(!html.includes('class="brand-school"'), "header school name should be removed");
 assert.ok(!html.includes('id="thought-note"'), "unused thought note should be removed");
 assert.ok(!app.includes("thoughtNote"), "note handling should be removed from app.js");
+for (const line of [
+  '<span class="hero-line">子どもの事実から、</span>',
+  '<span class="hero-line">授業と学校を</span>',
+  '<span class="hero-line hero-highlight">とらえる。</span>',
+]) {
+  assert.ok(html.includes(line), `home title is missing fixed line: ${line}`);
+}
+assert.ok(styles.includes(".hero-line"), "home title lines should have a fixed-line style");
 const fixedRemSizes = [...styles.matchAll(/font-size:\s*(\d*\.?\d+)rem/g)].map((match) => Number(match[1]));
 assert.ok(Math.min(...fixedRemSizes) >= 0.89, "fixed text sizes should be at least 0.89rem (about 10.7pt)");
 console.log("PASS static UI contract");
