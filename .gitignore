@@ -1,5 +1,6 @@
 tmp/
 docs/
+.worktrees/
 \#_*.txt
 .DS_Store
 Thumbs.db
