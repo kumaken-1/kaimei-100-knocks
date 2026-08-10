@@ -623,6 +623,45 @@ legend {
   padding-left: 1.25rem;
 }
 
+.deep-dive-block {
+  margin: 1.8rem 0;
+  padding-top: 1.6rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.22);
+}
+
+.deep-dive-block[hidden] {
+  display: none;
+}
+
+.deep-dive-kicker {
+  margin: 0 0 0.85rem;
+  color: var(--leaf);
+  font-size: 0.95rem;
+  font-weight: 800;
+}
+
+.deep-dive-grid {
+  display: grid;
+  gap: 0.75rem;
+}
+
+.deep-dive-item {
+  padding: 1rem 1.1rem;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.07);
+}
+
+.deep-dive-item h3 {
+  margin: 0 0 0.35rem;
+  color: var(--white);
+  font-size: 1rem;
+}
+
+.deep-dive-item p {
+  margin: 0;
+  color: #dce8ed;
+}
+
 .reflection-panel .primary-button {
   color: var(--ink);
   border-color: var(--leaf);

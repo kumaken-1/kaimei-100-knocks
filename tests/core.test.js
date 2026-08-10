@@ -53,6 +53,19 @@ test("recording a response marks the question complete and keeps the selected ch
   assert.deepEqual(state.completed, []);
 });
 
+test("the first ten questions include complete deep-dive hints", () => {
+  for (const question of QUESTIONS.slice(0, 10)) {
+    assert.ok(question.deepDive);
+    assert.ok(question.deepDive.perspective);
+    assert.ok(question.deepDive.evidence);
+    assert.ok(question.deepDive.experiment);
+  }
+
+  for (const question of QUESTIONS.slice(10)) {
+    assert.equal(question.deepDive, undefined);
+  }
+});
+
 test("progress reports completed and total counts without scoring", () => {
   const state = {
     completed: ["knock-001", "knock-003"],

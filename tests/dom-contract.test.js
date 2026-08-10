@@ -14,6 +14,10 @@ const requiredHtml = [
   'id="list-view"',
   'id="answer-form"',
   'id="reflection-panel"',
+  'id="deep-dive-block"',
+  'id="deep-dive-perspective"',
+  'id="deep-dive-evidence"',
+  'id="deep-dive-experiment"',
   'id="question-list"',
   'id="list-group-filter"',
   'aria-live="polite"',
@@ -30,6 +34,7 @@ for (const marker of [
   "pickRandomId",
   "renderQuestionList",
   "showQuestion",
+  "deepDiveBlock",
 ]) {
   assert.ok(app.includes(marker), `app.js is missing ${marker}`);
 }

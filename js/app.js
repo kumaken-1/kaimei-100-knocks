@@ -38,6 +38,10 @@ const elements = {
   perspectiveTitle: document.querySelector("#perspective-title"),
   perspectiveBody: document.querySelector("#perspective-body"),
   followUpList: document.querySelector("#follow-up-list"),
+  deepDiveBlock: document.querySelector("#deep-dive-block"),
+  deepDivePerspective: document.querySelector("#deep-dive-perspective"),
+  deepDiveEvidence: document.querySelector("#deep-dive-evidence"),
+  deepDiveExperiment: document.querySelector("#deep-dive-experiment"),
   questionList: document.querySelector("#question-list"),
   listGroupFilter: document.querySelector("#list-group-filter"),
   listSummary: document.querySelector("#list-summary"),
@@ -144,6 +148,10 @@ function fillReflection(question) {
       return item;
     }),
   );
+  elements.deepDivePerspective.textContent = question.deepDive?.perspective ?? "";
+  elements.deepDiveEvidence.textContent = question.deepDive?.evidence ?? "";
+  elements.deepDiveExperiment.textContent = question.deepDive?.experiment ?? "";
+  elements.deepDiveBlock.hidden = !question.deepDive;
 }
 
 function showQuestion(questionId) {
