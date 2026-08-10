@@ -38,10 +38,24 @@ test("the full set contains one hundred complete, uniquely identified questions"
     assert.ok(question.theme);
     assert.ok(question.context);
     assert.ok(question.prompt);
-    assert.ok(question.choices.length >= 3);
+    assert.equal(question.choices.length, 3);
+    for (const choice of question.choices) {
+      assert.ok(choice.feedback.value.trim());
+      assert.ok(choice.feedback.check.trim());
+    }
     assert.ok(question.perspective.title);
     assert.ok(question.perspective.body);
-    assert.equal(question.followUps.length, 2);
+    assert.equal("followUps" in question, false);
+  }
+
+  const feedbackSentences = QUESTIONS.flatMap((question) =>
+    question.choices.flatMap((choice) => [choice.feedback.value, choice.feedback.check]),
+  );
+  assert.equal(new Set(feedbackSentences).size, 600);
+  assert.equal(new Set(QUESTIONS.map((question) => question.perspective.body)).size, 100);
+
+  for (const key of ["perspective", "evidence", "experiment", "condition"]) {
+    assert.equal(new Set(QUESTIONS.map((question) => question.deepDive[key])).size, 100);
   }
 });
 
