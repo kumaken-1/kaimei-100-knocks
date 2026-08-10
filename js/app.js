@@ -32,7 +32,6 @@ const elements = {
   questionContext: document.querySelector("#question-context"),
   questionTitle: document.querySelector("#question-title"),
   choiceList: document.querySelector("#choice-list"),
-  thoughtNote: document.querySelector("#thought-note"),
   answerForm: document.querySelector("#answer-form"),
   formMessage: document.querySelector("#form-message"),
   reflectionPanel: document.querySelector("#reflection-panel"),
@@ -160,7 +159,6 @@ function showQuestion(questionId) {
   elements.choiceList.replaceChildren(
     ...question.choices.map((choice) => createChoice(question, choice, savedResponse?.choiceId)),
   );
-  elements.thoughtNote.value = savedResponse?.note ?? "";
   elements.formMessage.textContent = "";
   fillReflection(question);
   elements.reflectionPanel.hidden = !savedResponse;
@@ -220,7 +218,7 @@ elements.answerForm.addEventListener("submit", (event) => {
     return;
   }
 
-  state = recordResponse(state, currentQuestionId, choiceId, elements.thoughtNote.value);
+  state = recordResponse(state, currentQuestionId, choiceId);
   saveState();
   updateProgress();
   elements.formMessage.textContent = "";

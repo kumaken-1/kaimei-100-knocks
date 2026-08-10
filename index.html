@@ -17,7 +17,6 @@
       <button class="brand" id="brand-button" type="button" aria-label="ホームへ戻る">
         <span class="brand-mark" aria-hidden="true">問</span>
         <span>
-          <span class="brand-school">開明小を考える</span>
           <span class="brand-title">100本ノック</span>
         </span>
       </button>
@@ -84,9 +83,7 @@
           </ul>
         </div>
 
-        <p class="privacy-note">
-          メモはこの端末内だけに保存されます。児童名などの個人情報は書かないでください。
-        </p>
+        <p class="privacy-note">回答と進み具合は、この端末内だけに保存されます。</p>
       </section>
 
       <section class="view question-view" id="question-view" aria-labelledby="question-title" hidden>
@@ -124,16 +121,6 @@
               <legend>いまの考えに近いものを、ひとまず選んでみる</legend>
               <div class="choice-list" id="choice-list"></div>
             </fieldset>
-
-            <label class="note-field" for="thought-note">
-              <span>考えのメモ <small>任意・この端末だけに保存</small></span>
-              <textarea
-                id="thought-note"
-                rows="3"
-                maxlength="300"
-                placeholder="理由や、気になった子どもの姿を短く…（児童名は書かない）"
-              ></textarea>
-            </label>
 
             <p class="form-message" id="form-message" aria-live="polite"></p>
             <button class="primary-button reveal-button" type="submit">視点をひらく</button>

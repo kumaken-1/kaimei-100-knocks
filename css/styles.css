@@ -35,8 +35,7 @@ body {
   line-height: 1.7;
 }
 
-button,
-textarea {
+button {
   font: inherit;
 }
 
@@ -45,7 +44,6 @@ button {
 }
 
 button:focus-visible,
-textarea:focus-visible,
 input:focus-visible + .choice-card {
   outline: 3px solid var(--coral);
   outline-offset: 3px;
@@ -111,16 +109,9 @@ input:focus-visible + .choice-card {
   font-size: 1.3rem;
 }
 
-.brand-school,
 .brand-title {
   display: block;
   line-height: 1.15;
-}
-
-.brand-school {
-  color: var(--ink-soft);
-  font-size: 0.89rem;
-  letter-spacing: 0.08em;
 }
 
 .brand-title {
@@ -561,34 +552,6 @@ legend {
   content: "✓";
 }
 
-.note-field {
-  display: grid;
-  gap: 0.55rem;
-  margin: 1.5rem 0 1rem;
-  font-size: 1.05rem;
-  font-weight: 700;
-}
-
-.note-field small {
-  color: var(--ink-soft);
-  font-weight: 500;
-}
-
-textarea {
-  width: 100%;
-  resize: vertical;
-  padding: 0.9rem 1rem;
-  border: 2px solid var(--line);
-  border-radius: 12px;
-  color: var(--ink);
-  background: #fff;
-  line-height: 1.65;
-}
-
-textarea::placeholder {
-  color: #718692;
-}
-
 .form-message {
   min-height: 1.5em;
   margin: 0.4rem 0;
@@ -850,10 +813,6 @@ textarea::placeholder {
   .brand-mark {
     width: 38px;
     height: 38px;
-  }
-
-  .brand-school {
-    display: none;
   }
 
   .brand-title {

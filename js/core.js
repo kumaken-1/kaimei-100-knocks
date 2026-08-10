@@ -21,10 +21,7 @@ export function sanitizeState(rawState, validIds) {
         typeof response === "object" &&
         typeof response.choiceId === "string"
       ) {
-        responses[id] = {
-          choiceId: response.choiceId,
-          note: typeof response.note === "string" ? response.note : "",
-        };
+        responses[id] = { choiceId: response.choiceId };
       }
     }
   }
@@ -32,7 +29,7 @@ export function sanitizeState(rawState, validIds) {
   return { completed, responses };
 }
 
-export function recordResponse(state, questionId, choiceId, note = "") {
+export function recordResponse(state, questionId, choiceId) {
   const completed = state.completed.includes(questionId)
     ? [...state.completed]
     : [...state.completed, questionId];
@@ -41,7 +38,7 @@ export function recordResponse(state, questionId, choiceId, note = "") {
     completed,
     responses: {
       ...state.responses,
-      [questionId]: { choiceId, note: note.trim() },
+      [questionId]: { choiceId },
     },
   };
 }

@@ -51,7 +51,7 @@ async function run() {
     assert.match(await desktop.locator("#form-message").innerText(), /1つ選んでください/);
 
     await desktop.locator(".choice-option").nth(1).locator("label").click();
-    await desktop.locator("#thought-note").fill("子どもの言葉の変化を見たい");
+    assert.equal(await desktop.locator("#thought-note").count(), 0);
     await desktop.locator("#answer-form button[type='submit']").click();
     await desktop.locator("#reflection-panel").waitFor({ state: "visible" });
     await desktop.locator("#reflection-panel").evaluate((panel) =>

@@ -44,15 +44,12 @@ test("the full set contains one hundred complete, uniquely identified questions"
   }
 });
 
-test("recording a response marks the question complete and keeps the note", () => {
+test("recording a response marks the question complete and keeps the selected choice", () => {
   const state = createInitialState();
-  const updated = recordResponse(state, "knock-001", "observe", "発言の変化を見る");
+  const updated = recordResponse(state, "knock-001", "observe");
 
   assert.deepEqual(updated.completed, ["knock-001"]);
-  assert.deepEqual(updated.responses["knock-001"], {
-    choiceId: "observe",
-    note: "発言の変化を見る",
-  });
+  assert.deepEqual(updated.responses["knock-001"], { choiceId: "observe" });
   assert.deepEqual(state.completed, []);
 });
 
@@ -100,7 +97,7 @@ test("sanitizing stored state removes unknown questions and malformed responses"
   assert.deepEqual(sanitized, {
     completed: ["knock-001"],
     responses: {
-      "knock-001": { choiceId: "observe", note: "メモ" },
+      "knock-001": { choiceId: "observe" },
     },
   });
 });

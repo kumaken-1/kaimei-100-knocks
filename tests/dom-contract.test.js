@@ -35,6 +35,9 @@ for (const marker of [
 }
 
 assert.ok(!html.includes("https://"), "the app should not require external assets");
+assert.ok(!html.includes('class="brand-school"'), "header school name should be removed");
+assert.ok(!html.includes('id="thought-note"'), "unused thought note should be removed");
+assert.ok(!app.includes("thoughtNote"), "note handling should be removed from app.js");
 const fixedRemSizes = [...styles.matchAll(/font-size:\s*(\d*\.?\d+)rem/g)].map((match) => Number(match[1]));
 assert.ok(Math.min(...fixedRemSizes) >= 0.89, "fixed text sizes should be at least 0.89rem (about 10.7pt)");
 console.log("PASS static UI contract");
