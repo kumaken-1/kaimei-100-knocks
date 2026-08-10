@@ -50,14 +50,20 @@ async function run() {
     await desktop.locator("#answer-form button[type='submit']").click();
     assert.match(await desktop.locator("#form-message").innerText(), /1つ選んでください/);
 
-    await desktop.locator(".choice-option").nth(1).locator("label").click();
+    await desktop.locator(".choice-option").first().locator("label").click();
     assert.equal(await desktop.locator("#thought-note").count(), 0);
     await desktop.locator("#answer-form button[type='submit']").click();
     await desktop.locator("#reflection-panel").waitFor({ state: "visible" });
     await desktop.locator("#reflection-panel").evaluate((panel) =>
       Promise.all(panel.getAnimations().map((animation) => animation.finished)),
     );
-    assert.equal(await desktop.locator("#follow-up-list li").count(), 2);
+    assert.match(await desktop.locator("#choice-feedback-value").innerText(), /見通し|時間配分/);
+    assert.equal(await desktop.locator("#deep-dive-block").getAttribute("open"), null);
+    await desktop.locator(".choice-option").nth(1).locator("label").click();
+    await desktop.locator("#answer-form button[type='submit']").click();
+    assert.match(await desktop.locator("#choice-feedback-value").innerText(), /子ども|考え|変化/);
+    await desktop.locator("#deep-dive-block > summary").click();
+    assert.notEqual(await desktop.locator("#deep-dive-block").getAttribute("open"), null);
     assert.equal(await desktop.locator("#question-progress-text").innerText(), "1 / 100");
     await desktop.screenshot({ path: path.join(SCREENSHOTS, "desktop-reflection.png"), fullPage: true });
 
@@ -104,6 +110,9 @@ async function run() {
     await mobile.locator("#reflection-panel").evaluate((panel) =>
       Promise.all(panel.getAnimations().map((animation) => animation.finished)),
     );
+    assert.equal(await mobile.locator("#deep-dive-block").getAttribute("open"), null);
+    const summaryBox = await mobile.locator("#deep-dive-block > summary").boundingBox();
+    assert.ok(summaryBox && summaryBox.height >= 44, `deep-dive summary is too short: ${summaryBox?.height}`);
     await mobile.screenshot({ path: path.join(SCREENSHOTS, "mobile-reflection.png"), fullPage: true });
     assert.equal(await mobile.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth), true);
 
