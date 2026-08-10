@@ -606,26 +606,26 @@ legend {
   color: #dce8ed;
 }
 
-.follow-up-block {
-  margin: 1.6rem 0;
+.choice-feedback {
+  margin: 0 0 1.8rem;
   padding: 1.2rem 1.3rem;
   border: 1px solid rgba(255, 255, 255, 0.18);
   border-radius: 12px;
   background: rgba(255, 255, 255, 0.07);
 }
 
-.follow-up-block > p {
-  margin: 0 0 0.55rem;
-  color: var(--leaf);
-  font-size: 0.95rem;
-  font-weight: 800;
+.choice-feedback[hidden] {
+  display: none;
 }
 
-.follow-up-block ul {
-  display: grid;
-  gap: 0.55rem;
-  margin: 0;
-  padding-left: 1.25rem;
+.choice-feedback h2,
+.choice-feedback h3 {
+  margin: 0.75rem 0 0.35rem;
+}
+
+.choice-feedback p {
+  margin-top: 0;
+  color: #dce8ed;
 }
 
 .deep-dive-block {
@@ -634,15 +634,23 @@ legend {
   border-top: 1px solid rgba(255, 255, 255, 0.22);
 }
 
-.deep-dive-block[hidden] {
-  display: none;
-}
-
-.deep-dive-kicker {
-  margin: 0 0 0.85rem;
+.deep-dive-block > summary {
+  min-height: 44px;
+  display: flex;
+  align-items: center;
   color: var(--leaf);
   font-size: 0.95rem;
   font-weight: 800;
+  cursor: pointer;
+}
+
+.deep-dive-block > summary:focus-visible {
+  outline: 3px solid var(--coral);
+  outline-offset: 3px;
+}
+
+.deep-dive-block[open] .deep-dive-grid {
+  margin-top: 1rem;
 }
 
 .deep-dive-grid {

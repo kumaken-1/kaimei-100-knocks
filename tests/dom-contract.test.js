@@ -14,6 +14,9 @@ const requiredHtml = [
   'id="list-view"',
   'id="answer-form"',
   'id="reflection-panel"',
+  'id="choice-feedback"',
+  'id="choice-feedback-value"',
+  'id="choice-feedback-check"',
   'id="deep-dive-block"',
   'id="deep-dive-perspective"',
   'id="deep-dive-evidence"',
@@ -28,6 +31,10 @@ const requiredHtml = [
 for (const marker of requiredHtml) {
   assert.ok(html.includes(marker), `index.html is missing ${marker}`);
 }
+
+assert.ok(html.includes('<details class="deep-dive-block"'), "deep dive should use native details");
+assert.ok(html.includes("<summary"), "deep dive should have a native summary");
+assert.equal(html.includes('id="follow-up-list"'), false, "legacy follow-up list should be removed");
 
 for (const marker of [
   "localStorage",

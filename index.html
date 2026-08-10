@@ -126,19 +126,22 @@
             <button class="primary-button reveal-button" type="submit">視点をひらく</button>
           </form>
 
-          <section class="reflection-panel" id="reflection-panel" aria-labelledby="perspective-title" tabindex="-1" hidden>
+          <section class="reflection-panel" id="reflection-panel" aria-labelledby="choice-feedback-title" tabindex="-1" hidden>
+            <section class="choice-feedback" id="choice-feedback" aria-labelledby="choice-feedback-title" hidden>
+              <p class="reflection-kicker">選んだ判断を、見つめてみる</p>
+              <h2 id="choice-feedback-title">この判断が大切にしていること</h2>
+              <p id="choice-feedback-value"></p>
+              <h3>同時に確かめたいこと</h3>
+              <p id="choice-feedback-check"></p>
+            </section>
             <p class="reflection-kicker">視点を少し、ずらしてみる</p>
             <h2 id="perspective-title"></h2>
             <p class="perspective-body" id="perspective-body"></p>
-            <div class="follow-up-block">
-              <p>もう一段、考えるなら</p>
-              <ul id="follow-up-list"></ul>
-            </div>
-            <div class="deep-dive-block" id="deep-dive-block" hidden>
-              <p class="deep-dive-kicker">もう一段、見方を増やす</p>
+            <details class="deep-dive-block" id="deep-dive-block">
+              <summary>もう一段、見方を増やす</summary>
               <div class="deep-dive-grid">
                 <section class="deep-dive-item" aria-labelledby="deep-dive-perspective-title">
-                  <h3 id="deep-dive-perspective-title">見方を増やすヒント</h3>
+                  <h3 id="deep-dive-perspective-title">別の読み方</h3>
                   <p id="deep-dive-perspective"></p>
                 </section>
                 <section class="deep-dive-item" aria-labelledby="deep-dive-evidence-title">
@@ -154,7 +157,7 @@
                   <p id="deep-dive-condition"></p>
                 </section>
               </div>
-            </div>
+            </details>
             <div class="next-actions">
               <button class="primary-button" id="next-button" type="button">
                 次のノックへ <span aria-hidden="true">→</span>

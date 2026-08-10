@@ -1,6 +1,7 @@
 import { QUESTIONS, QUESTION_GROUPS } from "./questions.js";
 import {
   createInitialState,
+  getChoiceFeedback,
   getProgress,
   nextUncompletedId,
   pickRandomId,
@@ -35,9 +36,11 @@ const elements = {
   answerForm: document.querySelector("#answer-form"),
   formMessage: document.querySelector("#form-message"),
   reflectionPanel: document.querySelector("#reflection-panel"),
+  choiceFeedback: document.querySelector("#choice-feedback"),
+  choiceFeedbackValue: document.querySelector("#choice-feedback-value"),
+  choiceFeedbackCheck: document.querySelector("#choice-feedback-check"),
   perspectiveTitle: document.querySelector("#perspective-title"),
   perspectiveBody: document.querySelector("#perspective-body"),
-  followUpList: document.querySelector("#follow-up-list"),
   deepDiveBlock: document.querySelector("#deep-dive-block"),
   deepDivePerspective: document.querySelector("#deep-dive-perspective"),
   deepDiveEvidence: document.querySelector("#deep-dive-evidence"),
@@ -139,21 +142,19 @@ function createChoice(question, choice, savedChoiceId) {
   return wrapper;
 }
 
-function fillReflection(question) {
+function fillReflection(question, choiceId) {
+  const feedback = getChoiceFeedback(question, choiceId);
+  elements.choiceFeedback.hidden = !feedback;
+  elements.choiceFeedbackValue.textContent = feedback?.value ?? "";
+  elements.choiceFeedbackCheck.textContent = feedback?.check ?? "";
   elements.perspectiveTitle.textContent = question.perspective.title;
   elements.perspectiveBody.textContent = question.perspective.body;
-  elements.followUpList.replaceChildren(
-    ...question.followUps.map((followUp) => {
-      const item = document.createElement("li");
-      item.textContent = followUp;
-      return item;
-    }),
-  );
-  elements.deepDivePerspective.textContent = question.deepDive?.perspective ?? "";
-  elements.deepDiveEvidence.textContent = question.deepDive?.evidence ?? "";
-  elements.deepDiveExperiment.textContent = question.deepDive?.experiment ?? "";
-  elements.deepDiveCondition.textContent = question.deepDive?.condition ?? "";
-  elements.deepDiveBlock.hidden = !question.deepDive;
+  elements.deepDivePerspective.textContent = question.deepDive.perspective;
+  elements.deepDiveEvidence.textContent = question.deepDive.evidence;
+  elements.deepDiveExperiment.textContent = question.deepDive.experiment;
+  elements.deepDiveCondition.textContent = question.deepDive.condition;
+  elements.deepDiveBlock.open = false;
+  return feedback;
 }
 
 function showQuestion(questionId) {
@@ -170,8 +171,8 @@ function showQuestion(questionId) {
     ...question.choices.map((choice) => createChoice(question, choice, savedResponse?.choiceId)),
   );
   elements.formMessage.textContent = "";
-  fillReflection(question);
-  elements.reflectionPanel.hidden = !savedResponse;
+  const savedFeedback = fillReflection(question, savedResponse?.choiceId);
+  elements.reflectionPanel.hidden = !savedFeedback;
   updateProgress();
   setActiveView("question");
   history.replaceState(null, "", `#${question.id}`);
@@ -229,6 +230,8 @@ elements.answerForm.addEventListener("submit", (event) => {
   }
 
   state = recordResponse(state, currentQuestionId, choiceId);
+  const question = QUESTIONS.find((item) => item.id === currentQuestionId);
+  fillReflection(question, choiceId);
   saveState();
   updateProgress();
   elements.formMessage.textContent = "";
