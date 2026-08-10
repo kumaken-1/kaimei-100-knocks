@@ -3,6 +3,7 @@ import assert from "node:assert/strict";
 import { QUESTIONS, QUESTION_GROUPS } from "../js/questions.js";
 import {
   createInitialState,
+  getChoiceFeedback,
   getProgress,
   nextUncompletedId,
   pickRandomId,
@@ -51,6 +52,24 @@ test("recording a response marks the question complete and keeps the selected ch
   assert.deepEqual(updated.completed, ["knock-001"]);
   assert.deepEqual(updated.responses["knock-001"], { choiceId: "observe" });
   assert.deepEqual(state.completed, []);
+});
+
+test("choice feedback is returned only for a matching choice", () => {
+  const question = {
+    choices: [
+      {
+        id: "observe",
+        feedback: {
+          value: "子どもの変化を判断の中心に置いています。",
+          check: "計画のどこが変化を支えたかも確かめます。",
+        },
+      },
+    ],
+  };
+
+  assert.deepEqual(getChoiceFeedback(question, "observe"), question.choices[0].feedback);
+  assert.equal(getChoiceFeedback(question, "unknown"), null);
+  assert.equal(getChoiceFeedback(null, "observe"), null);
 });
 
 test("all questions include complete, concrete deep-dive hints", () => {

@@ -43,6 +43,13 @@ export function recordResponse(state, questionId, choiceId) {
   };
 }
 
+export function getChoiceFeedback(question, choiceId) {
+  if (!question || typeof choiceId !== "string") return null;
+  const choice = question.choices?.find((item) => item.id === choiceId);
+  if (!choice?.feedback?.value || !choice?.feedback?.check) return null;
+  return choice.feedback;
+}
+
 export function getProgress(state, questions) {
   const validIds = new Set(questions.map((question) => question.id));
   const completed = new Set(state.completed.filter((id) => validIds.has(id))).size;
